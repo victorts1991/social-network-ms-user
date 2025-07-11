@@ -137,3 +137,7 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+social-network-eb7f9-firebase-adminsdk-fbsvc-cbbcdecda1.json
+
+.DS_Store
