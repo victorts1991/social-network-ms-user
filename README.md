@@ -55,6 +55,7 @@ Crie um arquivo `.env` na raiz do projeto e configure as credenciais do seu proj
 FIREBASE_PROJECT_ID="seu-project-id"
 FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nSUA_CHAVE_PRIVADA_COMPLETA_AQUI_COM_QUEBRAS_DE_LINHA_LITERAL\n-----END PRIVATE KEY-----\n"
 FIREBASE_CLIENT_EMAIL="seu-client-email"
+```
 
 
 ## ⚙️ CI/CD & Implantação Automatizada
