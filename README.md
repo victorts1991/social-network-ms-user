@@ -89,8 +89,8 @@ Para garantir que a branch `main` (que representa o código em produção) seja 
         * Isso garante que todas as mudanças para `main` passem por um PR, permitindo revisão e verificação.
     * **`Require status checks to pass before merging` (Exigir que as verificações de status passem antes de fazer merge):** Marque esta opção.
         * Na lista que aparecer abaixo, procure e **selecione os seguintes jobs do seu workflow do GitHub Actions**:
-            * `check-pr-for-main-origin`: Para garantir que o PR para `main` veio exclusivamente de `develop`.
-            * `test-develop-branch`: (Opcional, mas **altamente recomendado**) Garante que os testes unitários/de integração da `develop` passaram antes que o código possa ser mesclado em `main`.
+            * `Check PR for Main Origin`: Para garantir que o PR para `main` veio exclusivamente de `develop`.
+            * `Run tests on develop branch`: (Opcional, mas **altamente recomendado**) Garante que os testes unitários/de integração da `develop` passaram antes que o código possa ser mesclado em `main`.
     * **`Require pull request reviews before merging` (Exigir revisões de pull request antes de fazer merge):** (Opcional, mas recomendado para produção) Marque esta opção para exigir que um ou mais revisores aprovem as mudanças.
     * **`Include administrators` (Incluir administradores):** (Opcional, mas recomendado) Marque esta opção para que as regras se apliquem também aos administradores do repositório.
     * Clique em **`Create`** (Criar) para salvar a regra.
