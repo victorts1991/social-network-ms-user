@@ -1,0 +1,54 @@
+name: CI/CD - Test & Branch Protection
+
+on:
+  push:
+    branches:
+      - develop 
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review] 
+    branches:
+      - main    
+      - develop 
+
+jobs:
+  test-develop-branch:
+    name: Run tests on develop branch 
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop' || github.event.pull_request.base.ref == 'develop'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 
+        with:
+          node-version: 18 
+
+      - name: Install dependencies
+        run: npm ci 
+
+      - name: Run unit tests
+        run: npm test 
+
+  check-pr-for-main-origin:
+    name: Check PR for Main Origin 
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.base_ref == 'main'
+
+    steps:
+      - name: Verify PR Source Branch is Develop
+        env:
+          PR_BASE_REF: ${{ github.base_ref }} 
+          PR_HEAD_REF: ${{ github.head_ref }} 
+        run: |
+          echo "Pull Request Base Branch: $PR_BASE_REF"
+          echo "Pull Request Head Branch: $PR_HEAD_REF"
+          # Verifica se a branch de origem do PR é 'develop'
+          if [[ "$PR_HEAD_REF" != "develop" ]]; then
+            echo "::error::Pull Requests para 'main' devem vir EXCLUSIVAMENTE da branch 'develop'."
+            echo "Por favor, crie seu Pull Request da branch 'develop'."
+            exit 1 # Sai com erro, fazendo o job falhar
+          else
+            echo "Source branch 'develop' confirmed for PR to 'main'. Proceeding."
+          fi
